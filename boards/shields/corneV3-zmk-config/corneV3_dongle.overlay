@@ -5,3 +5,13 @@
  */
 
 #include "corneV3.dtsi"
+
+&kscan0 { // 또는 kscan 노드의 실제 이름
+    status = "disabled";
+};
+
+/ {
+     chosen {
+         /delete-property/ zmk,kscan; // chosen에서도 kscan 지정을 제거
+     };
+};
