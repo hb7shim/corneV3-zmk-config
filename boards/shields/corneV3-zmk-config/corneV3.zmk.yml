@@ -1,0 +1,14 @@
+file_format: "1"
+id: corne_v3
+name: Corne V3
+type: shield
+url:
+requires: [pro_micro]
+exposes: [i2c_oled]
+features:
+  - keys
+  - display
+siblings:
+  - corne_v3_left
+  - corne_v3_right
+  - corne_v3_dongle
