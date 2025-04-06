@@ -43,7 +43,7 @@
         morph_esc: morph_esc {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp Tab>, <&kp ESC>;
+            bindings = <&kp TAB>, <&kp ESC>;
             mods = <(MOD_LCTL)>;
             keep-mods = <(MOD_LCTL)>
         };
@@ -51,7 +51,7 @@
         morph_esc2: morph_esc2 {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp Tab>, <&morph_esc>;
+            bindings = <&kp TAB>, <&morph_esc>;
             mods = <(MOD_LSFT)>;
             keep-mods = <(MOD_LSFT)>
         };
