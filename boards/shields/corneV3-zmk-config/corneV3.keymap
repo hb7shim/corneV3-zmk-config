@@ -10,8 +10,8 @@
 #include <dt-bindings/zmk/outputs.h>
 
 #define DEFAULT 0
-#define NUM 1
-// #define NAV 3
+#define NAV 1
+#define NUM 2
 // #define FUN 4
 
 # define ______ &trans
@@ -19,6 +19,43 @@
 / {
 
     behaviors {
+        lt1: layer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
+            display-name = "Layer-Tap";
+            require-prior-idle-ms = <125>;
+        };        
+
+        grave_ctrl: grave_ctrl {
+            compatible = "zmk,behavior-hold-tap";
+            label = "GRAVE_CTRL";
+            bindings = <&kp LC(GRAVE)>, <&kp GRAVE>; // NOTE: Hold binding first, then Tap binding!
+            // --- Optional Parameters ---
+            tapping-term-ms = <200>;        // Time (ms) to decide between tap and hold. Adjust as needed.
+            // flavor = "tap-preferred";    // Optional: Makes tapping easier if you sometimes hold briefly after tapping.
+                                            // Other flavors: "hold-preferred", "balanced" (default)
+            // quick-tap-ms = <150>;        // Optional: Taps within this time after another key are always taps (requires flavor != "hold-preferred")
+        };
+
+        morph_esc: morph_esc {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp Tab>, <&kp ESC>;
+            mods = <(MOD_LCTL)>;
+            keep-mods = <(MOD_LCTL)>
+        };
+
+        morph_esc2: morph_esc2 {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp Tab>, <&morph_esc>;
+            mods = <(MOD_LSFT)>;
+            keep-mods = <(MOD_LSFT)>
+        };
+
         bspc_del: backspace_delete {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -44,18 +81,6 @@
             bindings = <&kp COMMA>, <&kp SEMI>;
             mods = <(MOD_LSFT)>;
         };
-        dot_colon: dot_colon {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp DOT>, <&kp COLON>;
-            mods = <(MOD_LSFT)>;
-        };
-        qmrk_excl: qmrk_excl {
-            compatible = "zmk,behavior-mod-morph";
-            #binding-cells = <0>;
-            bindings = <&kp QMARK>, <&kp EXCL>;
-            mods = <(MOD_LSFT)>;
-        };
         slh_morph: slh_morph {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -69,36 +94,95 @@
             mods = <(MOD_LSFT)>;
         };
     };
+
+    combos {
+        compatible = "zmk,combos"; // 콤보 기능 사용 선언
+
+        // 1. F11 + F10 -> F12
+        combo_f12 {
+            timeout-ms = <50>; // 콤보 인식 시간 (ms)
+            key-positions = <10 11>; // F11과 F10 키의 *물리적 위치 인덱스*. 사용자의 키보드 레이아웃에 맞게 수정해야 함!
+            bindings = <&kp F12>;   // F12 키코드 출력
+            layers = <2>; // 특정 레이어에서만 동작하게 하려면 추가 (예: 기본 레이어 0)
+        };
+
+        // 2. [ + - -> []
+        combo_brackets {
+            timeout-ms = <50>;
+            key-positions = <4 7>; // '[' 와 '-' 키의 *물리적 위치 인덱스*. 사용자의 키보드 레이아웃에 맞게 수정해야 함!
+            bindings = <macro_brackets>; // 아래 정의된 매크로 호출
+            layers = <1>
+        };
+
+        // 3. End + Left Arrow -> ()
+        combo_parens {
+            timeout-ms = <50>;
+            key-positions = <16 19>; // End 와 Left Arrow 키의 *물리적 위치 인덱스*. 사용자의 키보드 레이아웃에 맞게 수정해야 함!
+            bindings = <macro_parens>; // 아래 정의된 매크로 호출
+        };
+    }; // combos 끝
+
+    macros {
+        // 2번 콤보용 매크로: [] 입력
+        macro_brackets: macro_brackets {
+            compatible = "zmk,behavior-macro";
+            label = "MACRO_BRACKETS"; // 매크로 이름 (ZMK 내부용)
+            #binding-cells = <0>;
+            bindings = <&kp LBKT &kp RBKT>; // '[' 키코드(LBKT) 누르고 ']' 키코드(RBKT) 누르기
+        };
+
+        // 3번 콤보용 매크로: () 입력
+        macro_parens: macro_parens {
+            compatible = "zmk,behavior-macro";
+            label = "MACRO_PARENS";
+            #binding-cells = <0>;
+            bindings = <&kp LPAR &kp RPAR>; // '(' 키코드(LPAR) 누르고 ')' 키코드(RPAR) 누르기
+        };
+    }; // macros 끝    
+
         keymap {
                 compatible = "zmk,keymap";
 
                 default_layer {
                         bindings = <
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-       &kp TAB        &kp Q         &kp W         &kp E         &kp R         &kp T             &kp Y         &kp U         &kp I         &kp O         &kp P        &kp APOS   
+    &kp morph_esc2    &kp Q         &kp W         &kp E         &kp R         &kp T             &kp Y         &kp U         &kp I         &kp O         &kp P        &kp BSLH   
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────┤
-       &kp LSHFT      &kp A         &kp S         &kp D         &kp F         &kp G             &kp H         &kp J         &kp K         &kp L        &kp SEMI      &kp APOS
+    &mt LCTRL CAPS    &kp A         &kp S         &kp D         &kp F         &kp G             &kp H         &kp J         &kp K         &kp L        &kp SEMI   &mt LCTRL APOS
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────┤
-       &kp LSHFT      &kp Z         &kp X         &kp C         &kp V         &kp B             &kp N         &kp M        &kp COMMA     &kp DOT      &kp QMARK
+    &mt LSHFT LPAR    &kp Z         &kp X         &kp C         &kp V         &kp B             &kp N         &kp M        &kp COMMA     &kp DOT       &kp FSLH   &mt RSHFT RPAR
 // ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                                  &kp LGUI      &mo NUM     &smart_shft        &kp RET      &mo NUM      &kp RALT
+                                                  &kp LGUI      &mo NUM   &lt1 nav space     &lt1 nav RET    &mo NUM       &kp RALT
 //                                           ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
                         >;
                 };
 
+                nav_layer {
+                        bindings = <
+// ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
+       &kp TAB        &none         &none       &kp PG_UP      &kp LBKT      &kp LBKT          &kp RBKT     &kp MINUS       &kp UP       &kp EQUAL      &none       &kp PSCRN   
+// ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────┤
+       &kp LCTRL      &none        &kp HOME    &kp PG_DOWN     &kp END        &kp DEL          &kp BSPC      &kp LEFT      &kp DOWN      &kp RIGHT      &none       &kp LCTRL
+// ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────┤
+       &kp LSHFT     &kp LC(Z)     &kp LC(X)     &kp LC(C)     &kp LC(V)      &none             &none         &none         &none         &kp DOT       &none       &kp RSHFT
+// ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
+                                                 &kp LGUI      &mo NUM      &kp SPACE           &kp LALT      &mo NUM       &kp RALT
+//                                           ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
+                        >;
+                };
+ 
                 num_layer {
                         bindings = <
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-       &kp TAB        &kp Q         &kp W         &kp E         &kp R         &kp T             &kp Y         &kp U         &kp I         &kp O         &kp P        &kp APOS   
+       &kp ESC        &kp F1        &kp F2        &kp F3        &kp F4        &kp F5            &kp F6        &kp F7        &kp F8        &kp F9       &kp F10       &kp F11   
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────┤
-       &kp LCTRL      &kp A         &kp S         &kp D         &kp F         &kp G             &kp H         &kp J         &kp K         &kp L        &kp SEMI      &kp APOS
+       &kp LCTRL      &kp N1        &kp N2        &kp N3        &kp N4        &kp N5            &kp N6        &kp N7        &kp N8        &kp N9       &kp N0      &grave_ctrl
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────┤
-       &kp LSHFT      &kp Z         &kp X         &kp C         &kp V         &kp B             &kp N         &kp M        &kp COMMA     &kp DOT      &kp QMARK
+       &kp LSHFT      &none      &kp C_VOL_DN   &kp C_MUTE   &kp C_VOL_UP     &none             &none         &none         &none        &kp DOT        &none        &kp RSHFT
 // ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                                  &kp LGUI      &mo NUM      ______           &kp SPACE      &mo NUM     &kp RALT
+                                                  &kp LGUI      &mo NUM     &kp SPACE           &kp LALT      &mo NUM      &kp RALT
 //                                           ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
                         >;
                 };
-
         };
 };
