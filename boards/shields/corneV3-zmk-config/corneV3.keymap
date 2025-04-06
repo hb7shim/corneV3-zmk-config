@@ -110,7 +110,7 @@
         combo_brackets {
             timeout-ms = <50>;
             key-positions = <4 7>; // '[' 와 '-' 키의 *물리적 위치 인덱스*. 사용자의 키보드 레이아웃에 맞게 수정해야 함!
-            bindings = <macro_brackets>; // 아래 정의된 매크로 호출
+            bindings = <&macro_brackets>; // 아래 정의된 매크로 호출
             layers = <1>
         };
 
@@ -118,7 +118,7 @@
         combo_parens {
             timeout-ms = <50>;
             key-positions = <16 19>; // End 와 Left Arrow 키의 *물리적 위치 인덱스*. 사용자의 키보드 레이아웃에 맞게 수정해야 함!
-            bindings = <macro_parens>; // 아래 정의된 매크로 호출
+            bindings = <&macro_parens>; // 아래 정의된 매크로 호출
         };
     }; // combos 끝
 
