@@ -32,6 +32,7 @@
         grave_ctrl: grave_ctrl {
             compatible = "zmk,behavior-hold-tap";
             label = "GRAVE_CTRL";
+            binding-cells = <0>;
             bindings = <&kp LC(GRAVE)>, <&kp GRAVE>; // NOTE: Hold binding first, then Tap binding!
             // --- Optional Parameters ---
             tapping-term-ms = <200>;        // Time (ms) to decide between tap and hold. Adjust as needed.
