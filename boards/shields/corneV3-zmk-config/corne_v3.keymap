@@ -129,7 +129,7 @@
             key-positions = <25 34>; // z + /
             bindings = <&bootloader>;
             layers = <4>;
-        }
+        };
     }; // combos 끝
 
     macros {
