@@ -37,7 +37,7 @@
             tapping-term-ms = <200>;
             bindings = <&mo>, <&kp>;
             display-name = "paren-num";
-        }        
+        };        
 
         grave_ctrl: grave_ctrl {
             compatible = "zmk,behavior-hold-tap";
