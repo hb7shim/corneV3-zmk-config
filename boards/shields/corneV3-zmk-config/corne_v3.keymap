@@ -28,7 +28,16 @@
             bindings = <&mo>, <&kp>;
             display-name = "Layer-Tap";
             require-prior-idle-ms = <125>;
-        };        
+        };
+
+        pn: paren_num {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
+            display-name = "paren-num";
+        }        
 
         grave_ctrl: grave_ctrl {
             compatible = "zmk,behavior-hold-tap";
@@ -174,7 +183,7 @@
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────┤
     &mt LSHFT LPAR    &kp Z         &kp X         &kp C         &kp V         &kp B             &kp N         &kp M        &kp COMMA     &kp DOT       &kp FSLH   &mt RSHFT RPAR
 // ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
-                                                  &kp LGUI      &mo NUM   &lt1 NAV SPACE     &lt1 NAV RET    &mo NUM       &kp RALT
+                                                  &kp LGUI  &pn NUM LPAR  &lt1 NAV SPACE    &lt1 NAV RET   &pn NUM RPAR       &kp RALT
 //                                           ╰─────────────┴─────────────┴─────────────╯   ╰─────────────┴─────────────┴─────────────╯
                         >;
                 };
