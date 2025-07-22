@@ -73,7 +73,7 @@
             #binding-cells = <0>;
             bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
             ignored-key-positions = <8 19 20 21>;
-        }
+        };
 
         bspc_del: backspace_delete {
             compatible = "zmk,behavior-mod-morph";
