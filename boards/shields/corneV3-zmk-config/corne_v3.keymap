@@ -67,6 +67,14 @@
             keep-mods = <(MOD_LSFT)>;
         };
 
+        swap: swapper {
+            compatible = "zmk,behavior-tri-state";
+            label = "SWAPPER";
+            #binding-cells = <0>;
+            bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
+            ignored-key-positions = <8 19 20 21>;
+        }
+
         bspc_del: backspace_delete {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
@@ -191,7 +199,7 @@
                 nav_layer {
                         bindings = <
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-       &kp TAB        &none         &none       &kp PG_UP      &kp LBKT      &kp LBKT          &kp RBKT     &kp MINUS       &kp UP       &kp EQUAL      &none       &kp PSCRN   
+       &swap          &none         &none       &kp PG_UP      &kp LBKT      &kp LBKT          &kp RBKT     &kp MINUS       &kp UP       &kp EQUAL      &none       &kp PSCRN   
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────┤
        &kp LCTRL      &none        &kp HOME    &kp PG_DN     &kp END        &kp DEL          &kp BSPC      &kp LEFT      &kp DOWN      &kp RIGHT      &none       &kp LCTRL
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────┤
