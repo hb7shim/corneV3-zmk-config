@@ -1,0 +1,121 @@
+layout: {zmk_keyboard: corne_v3}
+layers:
+  default:
+  - - {t: TAB, s: TAB}
+    - Q
+    - W
+    - E
+    - R
+    - T
+    - Y
+    - U
+    - I
+    - O
+  - - P
+    - \
+    - {t: CAPS, h: LCTRL}
+    - A
+    - S
+    - D
+    - F
+    - G
+    - H
+    - J
+  - - K
+    - L
+    - ;
+    - {t: '''', h: LCTRL}
+    - LSHFT
+    - Z
+    - X
+    - C
+    - V
+    - B
+  - - N
+    - M
+    - ','
+    - .
+    - /
+    - RSHFT
+    - LGUI
+    - {t: (, h: num}
+    - {t: SPACE, h: nav}
+    - {t: RET, h: nav}
+  - - {t: ), h: num}
+    - {t: RALT, s: LALT}
+  nav:
+  - ['&swap', '', '', PG UP, '[', '[', ']', '-', UP, '=']
+  - ['', PSCRN, LCTRL, '', HOME, PG DN, END, DEL, BSPC, LEFT]
+  - [DOWN, RIGHT, '', LCTRL, LSHFT, Ctl+Z, Ctl+X, Ctl+C, Ctl+V, '']
+  - - ''
+    - ''
+    - ''
+    - .
+    - ''
+    - RSHFT
+    - LGUI
+    - num
+    - {t: SPACE, type: held}
+    - LALT
+  - [num, RALT]
+  num:
+  - [ESC, F1, F2, F3, F4, F5, F6, F7, F8, F9]
+  - [F10, F11, LCTRL, '1', '2', '3', '4', '5', '6', '7']
+  - - '8'
+    - '9'
+    - '0'
+    - {t: '`', h: Ctl+`}
+    - LSHFT
+    - ''
+    - VOL DN
+    - MUTE
+    - VOL UP
+    - ''
+  - - bt
+    - ''
+    - ''
+    - .
+    - ''
+    - RSHFT
+    - LGUI
+    - {t: num, type: held}
+    - SPACE
+    - LALT
+  - [num, RALT]
+  bt:
+  - - ''
+    - {t: BT, h: '1'}
+    - {t: BT, h: '2'}
+    - {t: BT, h: '3'}
+    - {t: BT, h: '4'}
+    - ''
+    - ''
+    - ''
+    - ''
+    - OUT TOG
+  - ['', '', '', '', '', '', '', '', '', '']
+  - ['', '', '', '', '', '', '', BT CLR, '', '']
+  - - {type: held}
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - {type: held}
+    - ''
+    - ''
+  - ['', '']
+combos:
+- p: [10, 11]
+  k: F12
+  l: [num]
+- p: [4, 7]
+  k: '&macro_brackets'
+  l: [nav]
+- p: [16, 19]
+  k: '&macro_parens'
+  l: [nav]
+- p: [25, 34]
+  k: '&bootloader'
+  l: [bt]
