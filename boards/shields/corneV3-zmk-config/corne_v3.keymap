@@ -172,6 +172,34 @@
             #binding-cells = <0>;
             bindings = <&kp LPAR &kp RPAR>; // '(' 키코드(LPAR) 누르고 ')' 키코드(RPAR) 누르기
         };
+
+        bt_ble_1: bt_ble_1 {
+            compatible = "zmk,behavior-macro";
+            label = "BT_BLE_1";
+            #binding-cells = <0>;
+            bindings = <&out OUT_BLE &bt BT_SEL 1>;
+        };
+
+        bt_ble_2: bt_ble_2 {
+            compatible = "zmk,behavior-macro";
+            label = "BT_BLE_2";
+            #binding-cells = <0>;
+            bindings = <&out OUT_BLE &bt BT_SEL 2>;
+        };
+
+        bt_ble_3: bt_ble_3 {
+            compatible = "zmk,behavior-macro";
+            label = "BT_BLE_3";
+            #binding-cells = <0>;
+            bindings = <&out OUT_BLE &bt BT_SEL 3>;
+        };
+
+        bt_ble_4: bt_ble_4 {
+            compatible = "zmk,behavior-macro";
+            label = "BT_BLE_4";
+            #binding-cells = <0>;
+            bindings = <&out OUT_BLE &bt BT_SEL 4>;
+        };
     }; // macros 끝    
 
         keymap {
@@ -235,9 +263,9 @@
                 bt_layer {
                         bindings = <
 // ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮   ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬─────────────╮
-       &none      &bt BT_SEL 1   &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4     &none             &none         &none        &none       &out OUT_TOG    &none       &none             
+       &none          &none         &none         &none         &none         &none             &none         &none        &none       &out OUT_BLE  &out OUT_USB  &none
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────┤
-       &none          &none         &none         &none         &none         &none             &none         &none        &none        &none       &none       &none 
+       &none      &bt_ble_1      &bt_ble_2     &bt_ble_3     &bt_ble_4    &none             &none         &none        &none        &none       &none       &none
 // ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┬─────────────┤
        &none          &none         &none      &bt BT_CLR       &none         &none             &none         &none        &none        &none       &none       &none 
 // ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┼─────────────┤   ├─────────────┼─────────────┼─────────────┼─────────────┴─────────────┴─────────────╯
