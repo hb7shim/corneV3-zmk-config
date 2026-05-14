@@ -1,8 +1,7 @@
-# This file generates the GitHub Actions matrix
-# For simple board + shield combinations, add them
-# to the top level board and shield arrays, for more
-# control, add individual board + shield combinations to
-# the `include` property, e.g:
+# This file generates the GitHub Actions matrix.
+# For simple board + shield combinations, add them to the top-level
+# board and shield arrays. For more control, add individual board +
+# shield combinations to the include list.
 #
 # board: [ "nice_nano//zmk" ]
 # shield: [ "corne_left", "corne_right" ]
@@ -11,7 +10,7 @@
 #   - board: nice_nano//zmk
 #     shield: reviung41
 #
-# 깃허브 액션 빌드를 위한 설정
+# Build matrix for this custom Corne V3 split + dongle setup.
 ---
 include:
   - board: "nice_nano//zmk"

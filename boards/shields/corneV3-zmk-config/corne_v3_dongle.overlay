@@ -6,12 +6,19 @@
 
 #include "corne_v3.dtsi"
 
-&kscan0 { // 또는 kscan 노드의 실제 이름
+&kscan0 {
     status = "disabled";
 };
 
 / {
-     chosen {
-         /delete-property/ zmk,kscan; // chosen에서도 kscan 지정을 제거
-     };
+    chosen {
+        zmk,kscan = &mock_kscan;
+    };
+
+    mock_kscan: mock_kscan_0 {
+        compatible = "zmk,kscan-mock";
+        columns = <0>;
+        rows = <0>;
+        events = <0>;
+    };
 };
