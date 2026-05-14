@@ -83,17 +83,8 @@ layers:
     - LALT
   - [num, RALT]
   bt:
-  - - ''
-    - ''
-    - ''
-    - ''
-    - ''
-    - ''
-    - ''
-    - ''
-    - ''
-    - OUT BLE
-  - [OUT USB, '', '', BLE+BT1, BLE+BT2, BLE+BT3, BLE+BT4, '', '', '']
+  - ['', '', '', '', '', '', '', '', '', OUT BLE]
+  - [OUT USB, '', '', '&bt_ble_1', '&bt_ble_2', '&bt_ble_3', '&bt_ble_4', '', '', '']
   - ['', '', '', '', '', '', '', BT CLR, '', '']
   - - {type: held}
     - ''
